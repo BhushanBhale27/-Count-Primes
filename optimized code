@@ -1,0 +1,27 @@
+function countPrimes(n) {
+  // Initialize all numbers as prime.
+  const isPrime = new Array(n).fill(true);
+  // 0 and 1 are not primes.
+  isPrime[0] = false;
+  isPrime[1] = false;
+
+  // Loop from 2 to sqrt(n).
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    // If i is a prime, mark all its multiples as not primes.
+    if (isPrime[i]) {
+      for (let j = i * i; j < n; j += i) {
+        isPrime[j] = false;
+      }
+    }
+  }
+
+  // Count the number of primes.
+  let count = 0;
+  for (let i = 2; i < n; i++) {
+    if (isPrime[i]) {
+      count++;
+    }
+  }
+
+  return count;
+}
